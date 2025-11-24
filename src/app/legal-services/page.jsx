@@ -1,3 +1,5 @@
+"use client";
+
 import FaqSection from '@/components/FaqSection'
 import PrimaryServices from '@/components/PrimaryServices'
 import React from 'react'

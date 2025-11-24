@@ -103,6 +103,7 @@ export default function Testimonials({ title, list }) {
 
     return () => clearTimeout(autoSlideRef.current);
   }, [index, isSliding]);
+console.log("kjubifsbfifwefewusdfsd"); 
 
   return (
     <div className="relative w-full max-w-4xl mx-auto overflow-hidden">

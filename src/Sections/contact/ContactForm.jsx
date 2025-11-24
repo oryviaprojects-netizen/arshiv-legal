@@ -59,7 +59,7 @@ export default function ContactForm({ formData }) {
         name="name"
         register={register}
         error={errors.name}
-        placeholder="Enter your name"
+        placeholder="Enter your name name"
       />
 
       <Input

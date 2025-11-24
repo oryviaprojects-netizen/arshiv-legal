@@ -1,15 +1,21 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Source_Sans_3, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import "@/styles/blog-content.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+const Primary = Playfair_Display({
+  variable: "--font-Playfair_Display-Serif",
   subsets: ["latin"],
+  display: "swap",
+});
+const Secondary = Source_Sans_3({
+  variable: "--font-Source_Sans_3-sans-serif",
+  subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "Create Next App",
@@ -20,9 +26,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={` ${Primary.variable}${Secondary.variable} antialiased`}
       >
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

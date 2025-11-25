@@ -50,7 +50,7 @@ export default function ContactForm({ formData }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="p-s32 rounded-r16 space-y-s16"
+      className=" rounded-r16 space-y-s16"
     >
       <h3 className="title-h4 text-primary-main">{formData.title}</h3>
 

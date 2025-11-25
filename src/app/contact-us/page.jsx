@@ -23,7 +23,7 @@ export default function ContactSection() {
         <p className="body-large text-main">{contactSection.description}</p>
 
         {/* CONTACT BOX */}
-        <div className="max-w-5xl flex flex-col  mx-auto md:flex-row bg-[#FFD19C]/20 p-s32 rounded-r16 gap-s32 shadow">
+        <div className="max-w-5xl flex flex-col  mx-auto md:flex-row bg-[#FFD19C]/20 p-s24 md:p-s32 rounded-r16 gap-s32 shadow">
 
           {/* LEFT SIDE (Address) */}
           <div className="md:w-1/2 title-h4 space-y-s24">
@@ -57,8 +57,9 @@ export default function ContactSection() {
         <Testimonials
           list={contactSection.testimonials.list}
         />
-      <FaqSection faqs={faqs}/>
+     
       </section>
+     <div className='px-s8'><FaqSection faqs={faqs} /></div>
     </main>
   );
 }

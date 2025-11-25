@@ -24,7 +24,7 @@ export default function WhatShouldIDoNow() {
 
 
       {/* CONTENT SECTIONS */}
-      <section className="max-w-7xl mx-auto px-s32 py-s64">
+      <section className="max-w-7xl mx-auto px-s16 md:px-s32 py-s64">
         <div className="flex flex-col gap-s64">
           {sections.map((section, index) => (
             <div key={index} className="flex flex-col gap-s24">

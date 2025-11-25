@@ -142,7 +142,7 @@ import Data from '@/Data/data.json'
   const faqs = Data.homePage.faqs;
 function page() {
   return (
-    <div className='w-full flex flex-col justify-center gap-s48 px-s8 md:gap-s64  '>
+    <div className='w-full flex flex-col justify-center gap-s48 px-s16 md:gap-s64  '>
 
         <HeroSection/>
         <AboutSection/>

@@ -39,7 +39,7 @@ useEffect(() => {
 
       <Gradient title={title} description={description} />
 
-      <div className="max-w-7xl w-full mt-s64 space-y-s48">
+      <div className="max-w-7xl w-full px-s16 md:px-s32 mt-s64 space-y-s48">
 
         {Object.entries(services).map(([category, items]) => (
           <div

@@ -14,7 +14,7 @@ function Page() {
   return (
     <div className="w-full bg-background py-s64 px-s32">
       {/* ✅ SearchBar with endpoint="blog" (default) */}
-      <div className="my-s64">
+      <div className="my-s16">
         <SearchBar onSearch={handleSearch} endpoint="blog" />
       </div>
 

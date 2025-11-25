@@ -12,7 +12,7 @@ function Page() {
   };
 
   return (
-    <main className="w-full bg-background  py-s64">
+    <main className="w-full bg-background  py-s64 px-s32">
       {/* SEARCH BAR */}
       <div className="my-s16">
         <SearchBar endpoint="video" onSearch={handleSearch} />

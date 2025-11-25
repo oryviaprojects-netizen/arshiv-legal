@@ -9,8 +9,10 @@ function page() {
 <>
 
 <WhatShouldIDoNow />
+<div className='px-s8'>
 <FaqSection faqs={faqs} />
-        <GetInTouch 
+</div>
+          <GetInTouch 
 variant="white"
   height="220px"
   title="Start the Conversation That Can Change Everything"

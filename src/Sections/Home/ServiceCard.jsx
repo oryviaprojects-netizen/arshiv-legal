@@ -52,9 +52,9 @@ export default function ServiceCard({
     w-full 
     border-2 border-secondary-main 
     rounded-xl 
-    p-10 
+    p-s16 md:p-s24 lg:p-s32 
     bg-background shadow-sm 
-    flex flex-col gap-s32  
+    flex flex-col gap-s16  
   "
 >
 
@@ -99,7 +99,7 @@ export default function ServiceCard({
         </div>
 
         {/* Mobile CTA */}
-        <div className="mt-6 lg:hidden">
+        <div className=" lg:hidden">
           <Button
             variant="secondary"
             className="w-full"

@@ -15,7 +15,8 @@ function page() {
     covers={data.whatThisServiceCovers}
    cards={data.whatThisServiceCovers.cards}
  />
- <FaqSection faqs={faqs} />
+<div className='px-s8'><FaqSection faqs={faqs} /></div>
+
  
      </div>
    )

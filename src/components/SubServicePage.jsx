@@ -46,7 +46,9 @@ export default function SubServicePage({ title, shortIntro, covers, cards,descri
           </div>
         </div>
       </section>
-<WhyChooseUs/>
+<div className="px-s8">
+  <WhyChooseUs/>
+</div>
     </main>
   );
 }

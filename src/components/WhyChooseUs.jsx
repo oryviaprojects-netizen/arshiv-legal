@@ -13,7 +13,6 @@ export default function WhyChooseUs() {
         w-full 
         max-w-7xl 
         mx-auto 
-        px-s8
         bg-background
       "
     >

@@ -9,7 +9,7 @@ export default function PricingSection() {
   const pricingList = data.pricing;
 
   return (
-    <section className="w-full bg-background py-s64 px-s8">
+    <section className="w-full bg-background py-s64 ">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="mb-s48">

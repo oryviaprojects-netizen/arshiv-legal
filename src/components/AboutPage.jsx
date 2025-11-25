@@ -33,7 +33,7 @@ export default function AboutSection() {
           width={1920}
           height={500}
         />
-      <div className="max-w-7xl mx-auto px-s32 space-y-s64">
+      <div className="max-w-7xl mx-auto px-s16 md:px-s32 space-y-s64">
 
         {/* MISSION */}
         <div>

@@ -23,12 +23,12 @@ export default function ServicesSection() {
   return (
     <section className="w-full bg-background flex flex-col items-center ">
       {/* HEADING */}
-      <h2 className="subheading-h3 mb-s32 text-main w-full max-w-7xl px-s16 md:px-s32 text-center md:text-left">
+      <h2 className="subheading-h3 mb-s32 text-main w-full max-w-7xl px-s8 md:px-s32 text-center md:text-left">
         <span className="text-accent-main mr-2">{arrow}</span> {topHeading}
       </h2>
 
       {/* DYNAMIC SERVICE CARD */}
-      <div className="w-full max-w-7xl px-s16 md:px-s32">
+      <div className="w-full max-w-7xl  md:px-s16">
         <ServiceCard
           image={selectedLaw.image}
           title={selectedLaw.title}
@@ -40,7 +40,7 @@ export default function ServicesSection() {
 
       {/* TABS */}
      {/* TABS */}
-<div className="w-full max-w-4xl px-s32  md:px-s32 mt-s24">
+<div className="w-full max-w-4xl px-s16   md:px-s32 mt-s24">
   
   {/* MOBILE → horizontal scroll */}
   <div className="md:hidden w-full px-s16 overflow-x-auto scrollbar-hide">
@@ -49,7 +49,6 @@ export default function ServicesSection() {
         <Button
           key={tab.slug}
           variant={activeTab === tab.slug ? "ctaPrimary" : "outliner"}
-          className="whitespace-nowrap"
           onClick={() => setActiveTab(tab.slug)}
           aria-pressed={activeTab === tab.slug}
         >

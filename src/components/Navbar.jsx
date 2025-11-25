@@ -173,16 +173,18 @@ export default function Navbar() {
               </div>
             );
           })}
-         <div className="w-full">
-  <Button
-    href="/contact-us"
-    variant="ctaAccent"
-    as="link"
-    className="w-full block text-center"
-  >
-    Contact us
-  </Button>
-</div>
+          <div className="mx-s16">
+            <Button
+              href="/contact-us"
+              variant="ctaAccent"
+                    onClick={closeMenu}
+
+              as="link"
+              className=" block  text-center"
+            >
+              Contact us
+            </Button>
+          </div>
 
         </div>
 

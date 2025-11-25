@@ -15,7 +15,8 @@ export default function Page() {
         <PrimaryServices />
       </Suspense>
 
-      <FaqSection faqs={faqs} />
+<div className='px-s8'><FaqSection faqs={faqs} /></div>
+
 
       <GetInTouch
         variant="blue"

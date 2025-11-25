@@ -13,8 +13,8 @@ export default function GetInTouch({
     <section
       className={`
         w-full max-w-7xl mx-auto my-s64 
-        rounded-r8 px-s8 py-s64 
-        flex flex-col items-center text-center gap-s24 
+        rounded-r8 px-s16 py-s32 
+        flex flex-col items-center text-center gap-s16 
         ${isBlue ? "bg-primary-main text-background" : "bg-background text-main"}
       `}
     >

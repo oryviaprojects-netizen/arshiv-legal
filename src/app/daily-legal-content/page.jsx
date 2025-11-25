@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 function Page() {
   const [searchQuery, setSearchQuery] = useState("");
-console.log("hiiii  ");
+console.log("hiiii  good");
 
   const handleSearch = (query) => {
     setSearchQuery(query);

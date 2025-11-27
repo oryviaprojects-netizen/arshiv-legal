@@ -8,7 +8,7 @@ export default function Accordion({ question, answer, isLast }) {
 
   return (
     <div className={`${!isLast ? "border-b border-accent-main" : ""}`}>
-      
+
       {/* HEADER */}
       <button
         onClick={() => setOpen(!open)}
@@ -19,14 +19,14 @@ export default function Accordion({ question, answer, isLast }) {
           transition-all duration-200 hover:cursor-pointer
         "
       >
-        <span className="body-default text-main">{question}</span>
+        <span className="title-h4 text-main">{question}</span>
 
         {/* CUSTOM ICON */}
         <Image
           src={open ? "/Images/balance_open.png" : "/Images/balance_close.png"}
           alt="toggle"
-          width={28}
-          height={28}
+          width={40}
+          height={40}
           className="transition-transform duration-300"
         />
       </button>

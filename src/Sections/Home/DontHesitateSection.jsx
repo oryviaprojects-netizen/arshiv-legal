@@ -30,10 +30,10 @@ export default function DontHesitateSection() {
           alt="Gavel"
           width={84}
           height={16}
-          className="object-contain md:w[181px] md:h-[36px] lg:w-[200px] lg:h-[40px]"
+          className="object-contain md:w[181px] md:h-9 lg:w-[200px] lg:h-10"
         />
 
-        <h2 className="page-title-h2 text-main ">
+        <h2 className="page-title-h2 text-main">
           {dontHesitate.title}
         </h2>
 
@@ -43,7 +43,7 @@ export default function DontHesitateSection() {
           alt="Gavel"
           width={84}
           height={16}
-          className="object-contain rotate-180 md:w[181px] md:h-[36px] lg:w-[200px] lg:h-[40px]"
+          className="object-contain rotate-180 md:w[181px] md:h-9 lg:w-[200px] lg:h-10"
         />
       </div>
 
@@ -55,9 +55,9 @@ export default function DontHesitateSection() {
           body-large 
           text-main">
           {dontHesitate.description}
-          </span>
+        </span>
         <span className="text-accent-main body-large ">”</span>
-        </div>
+      </div>
     </section>
   );
 }

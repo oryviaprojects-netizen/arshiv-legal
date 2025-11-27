@@ -115,16 +115,16 @@ export default function Testimonials({ title, list }) {
         onTouchEnd={onTouchEnd}
       >
         {extendedList.map((t, i) => (
-          <div key={i} className="w-full flex-shrink-0 flex justify-center p-s48">
-            <div className="bg-secondary-light max-w-2xl w-full mx-auto p-s32 space-y-s64 rounded-r16 shadow-lg">
-              <p className="body-large text-main mb-s32">
-                <span className="text-accent-main body-large">"</span>
+          <div key={i} className="w-full flex-shrink-0 flex justify-center p-s16">
+            <div className="bg-secondary-light max-w-xl lg:max-w-2xl w-full  p-s16 md:p-s32 space-y-s64 rounded-r16 shadow-lg">
+              <p className="body-default md:body-large text-main mb-s32">
+                <span className="text-accent-main body-default md:body-large">"</span>
                 {t.text}
-                <span className="text-accent-main body-large">"</span>
+                <span className="text-accent-main body-default md:body-large">"</span>
               </p>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-s16">
+                <div className="flex items-center gap-s8 ">
                   <img
                     src={t.image}
                     className="w-10 h-10 rounded-full object-cover"
@@ -149,7 +149,7 @@ export default function Testimonials({ title, list }) {
 
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 -translate-y-1/2 text-accent-main hover:scale-110 transition left-1 sm:-left-3"
+        className="absolute top-1/2 -translate-y-1/2 text-accent-main hover:scale-110 transition -left-3 sm:-left-1"
         aria-label="Previous testimonial"
       >
         <ChevronLeft size={32} className="sm:hidden" />
@@ -158,7 +158,7 @@ export default function Testimonials({ title, list }) {
 
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 -translate-y-1/2 text-accent-main hover:scale-110 transition right-1 sm:-right-3"
+        className="absolute top-1/2 -translate-y-1/2 text-accent-main hover:scale-110 transition -right-2 sm:right-1"
         aria-label="Next testimonial"
       >
         <ChevronRight size={32} className="sm:hidden" />

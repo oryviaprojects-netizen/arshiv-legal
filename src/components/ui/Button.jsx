@@ -8,7 +8,7 @@ function Button({ variant = "primary", children, href, as = "button", className 
     primary: "body-default bg-primary-main text-background hover:bg-primary-light",
     secondary: "body-default text-accent-main bg-secondary-main hover:bg-secondary-light hover:text-accent-main",
     ctaAccent: "body-large text-background bg-accent-main hover:bg-secondary-main hover:text-accent-main",
-    ctaSecondary: "body-large text-accent-main bg-secondary-main hover:bg-secondary-main hover:text-accent-main",
+    ctaSecondary: "body-large text-accent-main bg-secondary-main hover:bg-secondary-light hover:text-accent-main",
     outliner:
       "body-default text-primary-main hover:bg-primary-main hover:text-background border-primary-main border-2",
     destructive: "body-default text-background bg-red-main hover:bg-red-dark",

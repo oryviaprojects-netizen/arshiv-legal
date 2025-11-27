@@ -15,19 +15,16 @@ export default function WhatShouldIDoNow() {
   const { title, sections } = whatShouldIDoNow;
 
   return (
-    <main className="w-full bg-background text-main space-y-s64">
+    <main className="w-full bg-background text-main ">
 
-      {/* 🔵 TOP GRADIENT BAR WITH TITLE */}
-<div className="">
-  <Gradient title={title}/>
-</div>
+        <Gradient title={title} />
 
 
       {/* CONTENT SECTIONS */}
-      <section className="max-w-7xl mx-auto px-s16 md:px-s32 py-s64">
-        <div className="flex flex-col gap-s64">
+      <section className="max-w-7xl mx-auto px-s16 md:px-s32 py-s40 md:py-s64">
+        <div className="flex flex-col gap-s40 lg:gap-s64">
           {sections.map((section, index) => (
-            <div key={index} className="flex flex-col gap-s24">
+            <div key={index} className="flex flex-col gap-s16 md:gap-s24">
 
               {/* SECTION HEADING */}
               <h2 className="page-title-h2 text-accent-main">
@@ -45,13 +42,13 @@ export default function WhatShouldIDoNow() {
 
               {/* IMAGE */}
               {section.image && (
-                <div className="w-full rounded-r8 overflow-hidden my-s24">
+                <div className="w-full rounded-r8 overflow-hidden mt-s40 ">
                   <Image
                     src={section.image}
                     alt="Legal Awareness"
                     width={1200}
                     height={600}
-                    className="w-full h-auto object-cover"
+                    className="w-full  h-[150px] md:h-[300px] lg:h-[400px] object-cover"
                     priority
                   />
                 </div>

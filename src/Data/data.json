@@ -60,14 +60,6 @@
           "slug": "public-law"
         },
         {
-          "label": "Administrative Law",
-          "slug": "administrative-law"
-        },
-        {
-          "label": "Constitutional Law",
-          "slug": "constitutional-law"
-        },
-        {
           "label": "Property Law",
           "slug": "property-law"
         },
@@ -78,6 +70,14 @@
         {
           "label": "Civil Law",
           "slug": "civil-law"
+        },
+        {
+          "label": "Administrative Law",
+          "slug": "administrative-law"
+        },
+        {
+          "label": "Constitutional Law",
+          "slug": "constitutional-law"
         }
       ],
       "civilLaw": {
@@ -922,16 +922,16 @@
       "title": "What Clients Say",
       "list": [
         {
-          "name": "Client Name",
+          "name": "Ayush Saini",
           "text": "This website is intended solely for general informational purposes about our law firm and the legal services we offer. The information provided here should not be construed as formal legal advice, nor does it create an attorney-client relationship.",
           "rating": 5,
           "image": "/Images/user.png"
         },
         {
-          "name": "Client Name",
+          "name": "Saksham Pandey",
           "text": "This website is intended solely for general informational purposes about our law firm and the legal services we offer. The information provided here should not be construed as formal legal advice, nor does it create an attorney-client relationship.",
           "rating": 3,
-          "image": "/Images/user.png"
+          "image": "/Images/blog.png"
         },
         {
           "name": "Client Name",
@@ -941,7 +941,7 @@
         }
         ,
         {
-          "name": "Client Name",
+          "name": "Abhijeet Dwivedi",
           "text": "This website is intended solely for general informational purposes about our law firm and the legal services we offer. The information provided here should not be construed as formal legal advice, nor does it create an attorney-client relationship.",
           "rating": 5,
           "image": "/Images/user.png"

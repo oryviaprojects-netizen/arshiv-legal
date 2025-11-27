@@ -5,20 +5,20 @@ import FaqSection from '@/components/FaqSection';
 const data = Data.subServices.fundamentalRights;
 const faqs = data.faqs || [];
 function page() {
-   return (
-     < div className='w-full flex flex-col justify-center gap-s48  md:gap-s64 '>
-    <SubServicePage 
-   title={data.title}
-   description={data.description}
-   shortIntro={data.shortIntro}
-    covers={data.whatThisServiceCovers}
-   cards={data.whatThisServiceCovers.cards}
- />
-<div className='px-s8'><FaqSection faqs={faqs} /></div>
+  return (
+    < div className='w-full flex flex-col justify-center gap-s40  md:gap-s64 '>
+      <SubServicePage
+        title={data.title}
+        description={data.description}
+        shortIntro={data.shortIntro}
+        covers={data.whatThisServiceCovers}
+        cards={data.whatThisServiceCovers.cards}
+      />
+      <div className='px-s16 md:px-s32'><FaqSection faqs={faqs} /></div>
 
- 
-     </div>
-   )
+
+    </div>
+  )
 }
 
 export default page

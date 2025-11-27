@@ -5,7 +5,7 @@ import Gradient from "@/components/ui/Gradient";
 import ServiceCardSmall from "@/components/ui/ServiceCard";
 import WhyChooseUs from "./WhyChooseUs";
 
-export default function SubServicePage({ title, shortIntro, covers, cards,description }) {
+export default function SubServicePage({ title, shortIntro, covers, cards, description }) {
   const total = cards?.length || 0;
 
   // optimized span logic
@@ -24,9 +24,9 @@ export default function SubServicePage({ title, shortIntro, covers, cards,descri
     <main className="w-full bg-background text-main">
       <Gradient title={title} description={description} />
 
-      <section className="max-w-7xl mx-auto px-s32 py-s64 flex flex-col gap-s64">
+      <section className="max-w-7xl mx-auto px-s32 py-s40 md:py-s64 flex flex-col gap-s64">
 
-      
+
 
         {/* WHAT THIS SERVICE COVERS */}
         <div className="flex flex-col gap-s32">
@@ -37,18 +37,18 @@ export default function SubServicePage({ title, shortIntro, covers, cards,descri
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-s24">
             {cards.map((card, index) => (
               <div key={index} className={getCardSpan(index)}>
-                <ServiceCardSmall 
-                  title={card.title} 
-                  subtitle={card.subtitle} 
+                <ServiceCardSmall
+                  title={card.title}
+                  subtitle={card.subtitle}
                 />
               </div>
             ))}
           </div>
         </div>
       </section>
-<div className="px-s8">
-  <WhyChooseUs/>
-</div>
+      <div className="px-s16 md:px-s32">
+        <WhyChooseUs />
+      </div>
     </main>
   );
 }

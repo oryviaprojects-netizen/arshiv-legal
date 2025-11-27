@@ -1,5 +1,4 @@
 "use client";
-
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -69,10 +68,10 @@ export default function HowWeWork() {
         ref={sliderWrapperRef}
       >
         {/* LEFT GRADIENT */}
-        <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-background to-transparent pointer-events-none z-20" />
+        <div className="absolute left-0 top-0 h-full w-20 bg-linear-to-r from-background to-transparent pointer-events-none z-20" />
 
         {/* RIGHT GRADIENT */}
-        <div className="absolute right-0 top-0 h-full w-20 bg-gradient-to-l from-background to-transparent pointer-events-none z-20" />
+        <div className="absolute right-0 top-0 h-full w-20 bg-linear-to-l from-background to-transparent pointer-events-none z-20" />
 
         {/* SLIDER */}
         <div ref={sliderRef} className="flex gap-s32 will-change-transform">

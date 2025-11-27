@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import Data from "@/Data/data.json";
 import PricingCard from "@/components/ui/Pricing";
@@ -9,17 +8,14 @@ export default function PricingSection() {
   const pricingList = data.pricing;
 
   return (
-    <section className="w-full bg-background py-s64 ">
-      <div className="max-w-7xl mx-auto">
+    <section className="w-full">
+      <div className="max-w-7xl mx-auto flex flex-col gap-s24 md:gap-s24 lg:gap-s32">
         {/* Heading */}
-        <div className="mb-s48">
-          <h2 className="page-title-h2 text-accent-main">
-            Consultancy Charges
-          </h2>
-        </div>
-
+        <h2 className="page-title-h2 text-accent-main">
+          Consultancy Charges
+        </h2>
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-s40 mb-s32">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-s24 md:gap-s32 lg:gap-s48 px-s32">
           {pricingList.map((item, index) => (
             <div key={index} className="flex justify-center">
               <PricingCard
@@ -33,9 +29,8 @@ export default function PricingSection() {
             </div>
           ))}
         </div>
-
         {/* Footer Note */}
-        <p className="text-center body-small text-gray-600">{data.footerNote}</p>
+        <p className="text-center body-small text-disable">{data.footerNote}</p>
       </div>
     </section>
   );

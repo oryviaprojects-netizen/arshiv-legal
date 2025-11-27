@@ -1,5 +1,4 @@
 "use client";
-
 import Button from "@/components/ui/Button";
 
 export default function GetInTouch({
@@ -12,32 +11,30 @@ export default function GetInTouch({
   return (
     <section
       className={`
-        w-full max-w-7xl mx-auto my-s64 
-        rounded-r8 px-s16 py-s32 
-        flex flex-col items-center text-center gap-s16 
+        w-full max-w-7xl mx-auto rounded-r16 p-s32 md:p-s48 lg:p-s64 flex flex-col items-center text-center gap-s16 md:gap-s24 lg:gap-s32
         ${isBlue ? "bg-primary-main text-background" : "bg-background text-main"}
       `}
     >
-      {/* Title */}
-      <h2
-        className={`
+      <div className="flex flex-col gap-s8 lg:gap-s16">
+        {/* Title */}
+        <h2
+          className={`
           subheading-h3
           ${isBlue ? "text-background" : "text-primary-main"}
         `}
-      >
-        {title}
-      </h2>
-
-      {/* Subtitle */}
-      <p
-        className={`
+        >
+          {title}
+        </h2>
+        {/* Subtitle */}
+        <p
+          className={`
           body-default 
           ${isBlue ? "text-background max-w-3xl" : "text-secondary max-w-2xl"}
         `}
-      >
-        {subtitle}
-      </p>
-
+        >
+          {subtitle}
+        </p>
+      </div>
       {/* Button */}
       <Button
         variant="ctaSecondary"

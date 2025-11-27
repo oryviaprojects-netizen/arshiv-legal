@@ -5,7 +5,7 @@ function server({ children }) {
   return (
     <div>
         {children}
-      <div className='px-s16'>
+      <div className='px-s16 md:px-s32 py-s40 md:py-s64'>
 
       <GetInTouch
         variant="blue"

@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -13,11 +14,17 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showServices, setShowServices] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
-
+  useEffect(() => {
+    if (isMenuOpen) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    return () => (document.body.style.overflow = "");
+  }, [isMenuOpen]);
   const pathname = usePathname();
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
+
+
 
   return (
     <nav className="fixed top-0 left-0 w-full flex justify-between items-center px-s16 md:px-s24 lg:px-s32 py-s8 lg:py-s16 bg-secondary-light body-default z-50">
@@ -106,15 +113,19 @@ export default function Navbar() {
                       key={service.href}
                       href={service.href}
                       className="
-                        body-default block rounded-r8 px-s12 py-s6 
-                        text-background opacity-90 hover:opacity-100 
-                        hover:text-secondary-light transition  after:content-['_↗']
-                      "
+        body-default block rounded-r8 px-s12 py-s6 
+        text-background opacity-90 hover:opacity-100 
+        hover:text-secondary-light transition
+      "
                     >
                       {service.label}
+                      <span className="caption font-extrabold  ml-1">
+                        ↗
+                      </span>
                     </Link>
                   ))}
                 </div>
+
 
               </div>
             ))}
@@ -133,10 +144,21 @@ export default function Navbar() {
           <AnimatedGavelIcon isOpen={isMenuOpen} onClick={toggleMenu} />
         </div>
       </div>
+      {/* OVERLAY FOR MOBILE CLOSE ON OUTSIDE CLICK */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 not-last-of-type: xl:hidden"
+          onClick={() => {
+            setIsMenuOpen(false);
+            setShowServices(false);
+          }}
+        />
+      )}
+
 
       {/* MOBILE MENU (unchanged) */}
       <div
-        className={`absolute top-full left-0 w-full bg-primary-main text-background overflow-hidden transition-all duration-300 ease-in-out xl:hidden ${isMenuOpen ? "max-h-[85vh] py-s8" : "max-h-0 py-0"
+        className={`absolute top-full left-0 w-full bg-primary-main text-background overflow-hidden transition-all duration-300 ease-in-out xl:hidden rounded-b-r16 shadow-2xl ${isMenuOpen ? "max-h-[85vh] py-s8" : "max-h-0 py-0"
           }`}
       >
         {/* Main Mobile Menu */}
@@ -173,11 +195,11 @@ export default function Navbar() {
               </div>
             );
           })}
-          <div className="mx-s16">
+          <div className="mx-s16 my-s8">
             <Button
               href="/contact-us"
               variant="ctaAccent"
-                    onClick={closeMenu}
+              onClick={closeMenu}
 
               as="link"
               className=" block  text-center"
@@ -191,7 +213,7 @@ export default function Navbar() {
         {/* LEGAL SERVICES SUBMENU */}
         <div
           className={`
-    absolute inset-0 
+    fixed inset-0 
     bg-primary-main 
     transition-transform duration-300
     ${showServices ? "translate-x-0" : "translate-x-full"}
@@ -215,16 +237,20 @@ export default function Navbar() {
               <div key={category}>
                 <h3 className="text-secondary-main title-h4 px-s16 py-s8">{category}</h3>
 
-                {items.map(({ label, href }) => (
-                  <Link
-                    key={href}
-                    href={href}
-                    onClick={closeMenu}
-                    className="block px-s32 py-s8  body-default rounded-r8 transition hover:bg-secondary-light hover:text-accent-main"
-                  >
-                    {label}
-                  </Link>
-                ))}
+            {items.map(({ label, href }) => (
+  <Link
+    key={href}
+    href={href}
+    onClick={() => {
+      closeMenu();          // closes main menu
+      setShowServices(false); // closes submenu
+    }}
+    className="block px-s32 py-s8  body-default rounded-r8 transition hover:bg-secondary-light hover:text-accent-main"
+  >
+    {label}
+  </Link>
+))}
+
               </div>
             ))}
           </div>
@@ -233,3 +259,4 @@ export default function Navbar() {
     </nav>
   );
 }
+

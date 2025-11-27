@@ -26,7 +26,7 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
       }
 
       const queryParam = query ? `&query=${encodeURIComponent(query)}` : "";
-      const res = await fetch(`http://localhost:3000/api/video?page=${pageNum}&limit=${limit}${queryParam}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/video?page=${pageNum}&limit=${limit}${queryParam}`);
       const json = await res.json();
 
       const videos = json?.data?.videos || [];
@@ -84,30 +84,30 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
       {/* SEARCH RESULTS INFO */}
       {hasSearched && searchQuery && items.length > 0 && (
         <div className="mb-s16   ">
-            <p 
-              onClick={handleBack}
-              className="text-accent-main cursor-pointer hover:underline mr-2"
-            >
-              ← Back
-            </p>
-         
+          <p
+            onClick={handleBack}
+            className="text-accent-main cursor-pointer hover:underline mr-2"
+          >
+            ← Back
+          </p>
+
         </div>
       )}
 
       {/* NO RESULTS */}
       {searchQuery && items.length === 0 && !loading && (
         <div className="flex flex-col items-center justify-center my-s48 text-center">
-          <svg 
+          <svg
             className="w-24 h-24 text-gray-300 mb-4"
-            fill="none" 
-            stroke="currentColor" 
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={1.5} 
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
             />
           </svg>
           <h3 className="text-xl font-semibold text-gray-700 mb-s8">
@@ -142,8 +142,8 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
             "
           >
             {items.map((item) => (
-              <div 
-                key={item._id} 
+              <div
+                key={item._id}
                 onClick={() => {
                   // ✅ Redirect to video URL in same tab
                   if (item.redirectUrl) {

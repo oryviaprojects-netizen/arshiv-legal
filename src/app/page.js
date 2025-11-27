@@ -1,167 +1,86 @@
-// import Button from "@/components/ui/Button";
-// import Footer from "@/components/Footer";
-// import Navbar from "@/components/Navbar";
-// import Image from "next/image";
-// import GetInTouch from "@/components/GetInTouch";
-// import PricingCard from "@/Sections/Home/Pricing";
-// import FaqSection from "@/components/FaqSection";
-// import PrivacyPolicyPage from "@/components/privacyPolicy";
-// import TermsConditions from "@/components/Terms&Condition";
-// import LegalDisclaimer from "@/components/LegalDisclaimer";
-// import WhatShouldIDoNow from "@/components/WhatShouldIDoNow";
-// import ServiceCard from "@/components/ui/ServiceCard";
-// import SmallCard from "@/components/ui/SmallCard";
-// import Data from "@/Data/data.json";
-// import SubServicePage from "@/components/SubServicePage";
-// import CardVariant from "@/components/ui/CardVariant";
-// import SearchBar from "@/components/ui/SearchBar";
-// import BlogVideoListingPage from "@/components/BlogListing";
-// import WhyChooseUs from "@/components/WhyChooseUs";
-// import AboutSection from "@/Sections/Home/AboutSection";
-// import DontHesitateSection from "@/Sections/Home/DontHesitateSection";
-// import ServicesSection from "@/Sections/Home/ServiceSecion";
-//   const data = Data.subServices.propertyDisputes;
-// export default function Home() {
-//   return (
-//     <div>
-//       <h1 className="hero-h1 text-primary-main mx-s64">
-//         Jai Shree Ram
-//       </h1>
-//       <h1 className="page-title-h2 text-secondary-main">
-//         jai shree ram
-//       </h1>
-//       <h1 className="subheading-h3 text-accent-main">
-//         jai shree ram
-//       </h1>
-//       <h1 className="title-h4 text-red-main">
-//         jai shree ram
-//       </h1>
-//       <h1 className="body-large text-primary-light">
-//         jai shree ram
-//       </h1>
-//       <h1 className="body-default text-secondary">
-//         jai shree ram
-//       </h1>
-//       <h1 className="body-small text-disable">
-//         jai shree ram
-//       </h1>
-//       <h1 className="caption text-secondary">
-//         jai shree ram
-//       </h1>
+// /src/app/page.js
+import React from 'react';
+import dynamic from 'next/dynamic';
+import AboutSection from '@/Sections/Home/AboutSection';
+import DontHesitateSection from '@/Sections/Home/DontHesitateSection';
+import ServicesSection from '@/Sections/Home/ServiceSecion';
+import FaqSection from '@/components/FaqSection';
+import GetInTouch from '@/components/GetInTouch';
+import HeroSection from '@/Sections/Home/HeroSection';
+import PrimaryServices from '@/components/PrimaryServices';
+import Data from '@/Data/data.json';
 
-//       <Button variant={"secondary"}>Book a Call</Button>
-//       <Button variant="destructive">Book a Call</Button>
-//       <Button variant={"outliner"} as={"link"} href={"https://oryvia.in"}>Book a Call</Button>
-//       <Button variant={"ctaAccent"} href={"https://oryvia.in"}>Book a Call</Button>
-//       <Button variant={"ctaSecondary"} href={"https://oryvia.in"}>Book a Call</Button>
-//       <Navbar />
-//       <CardVariant
-//   variant="blog"
-//   image="/Images/blog.png"
-//   title="Exploring Old Streets"
-//   description="A history of marketplaces and architecture."
-// />
-// <SearchBar />
-//       <CardVariant
-//   variant="video"
-//   image="/Images/video.png"
-//   title="Exploring Old Streets"
-//   description="A history of marketplaces and architecture."
-// />
-// <AboutSection/>
-// <WhyChooseUs/>
-// <DontHesitateSection/>
-// <ServicesSection/>
+// Dynamically import heavy or infrequently-critical sections to split bundles
+const CaseStudy = dynamic(() => import('@/Sections/Home/CaseStudy'), {
+  loading: () => <div aria-hidden className="py-12">Loading case studies…</div>
+});
+const PricingSection = dynamic(() => import('@/Sections/Home/PricingSection'), {
+  loading: () => <div aria-hidden className="py-12">Loading pricing…</div>
+});
+const WhyChooseUs = dynamic(() => import('@/components/WhyChooseUs'), {
+  loading: () => <div aria-hidden className="py-12">Loading…</div>
+});
+const HowWeWork = dynamic(() => import('@/Sections/Home/HowWeWork'), {
+  loading: () => <div aria-hidden className="py-12">Loading…</div>
+});
 
+// Revalidate the page every 60 seconds (ISR) - adjust as needed
+export const revalidate = 60;
 
-//       <FaqSection />
-//       <GetInTouch />
-//       <WhatShouldIDoNow/>
-//       <BlogVideoListingPage/>
-// <SubServicePage
-//   title={data.title}
-//   shortIntro={data.shortIntro}
-//   covers={data.whatThisServiceCovers}
-//   cards={data.whatThisServiceCovers.cards}
-// />
-//       <PricingCard
-//         star="*"
-//         title="Free"
-//         price="₹0 | First 10 Minutes"
-//         details={`Talk to us about your concern and get clear,
-// reliable legal direction at no cost.
-// We’ll help you understand where you stand and what your next legal step could be.
+const faqs = Data?.homePage?.faqs || [];
 
-// Start with clarity. No charge, no obligation.`}
-//         buttonText="Contact us"
-//         variant="free"
-//       />
-
-
-//       {/* <PrivacyPolicyPage /> */}
-//       <TermsConditions/>
-//       <LegalDisclaimer/>
-//       <ServiceCard 
-//         title="Service" 
-//         subtitle="Detailed description of the service."
-//       />
-//       <ServiceCard 
-//         title="Document Review"
-//       />
-//       <Footer/>
-
-
-    
-
-
-//       <SmallCard title={"Document Review"}/> 
-
-  
-
-
-//     </div>
-//   );
-// }
-
-
-import React from 'react'
-import AboutSection from '@/Sections/Home/AboutSection'
-import WhyChooseUs from '@/components/WhyChooseUs'
-import DontHesitateSection from '@/Sections/Home/DontHesitateSection'
-import ServicesSection from '@/Sections/Home/ServiceSecion'
-import PricingSection from '@/Sections/Home/PricingSection'
-import FaqSection from '@/components/FaqSection'
-import GetInTouch from '@/components/GetInTouch'
-import HeroSection from '@/Sections/Home/HeroSection'
-import { Divide } from 'lucide-react'
-import CaseStudy from '@/Sections/Home/CaseStudy'
-import HowWeWork from '@/Sections/Home/HowWeWork'
-import PrimaryServices from '@/components/PrimaryServices'
-import Data from '@/Data/data.json'
-
-  const faqs = Data.homePage.faqs;
-function page() {
+export default function Page() {
   return (
-    <div className='w-full flex flex-col justify-center gap-s48 px-s16 md:gap-s64  '>
+    <main role="main" className="mx-auto max-w-7xl px-s16 md:px-s32 py-s40 md:py-s48 lg:py-s64">
+      <div className="flex flex-col space-y-s40 md:space-y-s48 lg:space-y-s64">
+        {/* Hero: keep server-rendered for SEO / LCP */}
+        <section aria-labelledby="hero-heading">
+          <HeroSection />
+        </section>
 
-        <HeroSection/>
-        <AboutSection/>
-      <DontHesitateSection />
-      <ServicesSection />
-      <CaseStudy/>
-      <WhyChooseUs />
-      <PricingSection />
-      <HowWeWork/>
-      <FaqSection faqs={faqs} />
-      <GetInTouch 
-      variant="blue"
-  
-  title="Start the Conversation That Can Change Everything "
-  subtitle="If you're dealing with an issue related to this service, feel free to reach out. We'll explain your options clearly and guide you through the right next steps."
-      />
- 
-    </div>
-  )
+        <section aria-labelledby="about-heading">
+          <AboutSection />
+        </section>
+
+        <section aria-labelledby="dont-hesitate-heading">
+          <DontHesitateSection />
+        </section>
+
+        <section aria-labelledby="services-heading">
+          <ServicesSection />
+        </section>
+
+        {/* These are dynamic imports - they will be code-split to reduce initial bundle */}
+        <section aria-labelledby="case-study-heading">
+          <CaseStudy />
+        </section>
+
+        <section aria-labelledby="why-choose-us-heading">
+          <WhyChooseUs />
+        </section>
+
+        <section aria-labelledby="pricing-heading">
+          <PricingSection />
+        </section>
+
+        <section aria-labelledby="how-we-work-heading">
+          <HowWeWork />
+        </section>
+
+        <section aria-labelledby="faq-heading">
+          <FaqSection faqs={faqs} />
+        </section>
+
+        <section aria-labelledby="contact-heading">
+          <GetInTouch
+            variant="blue"
+            title="Start the Conversation That Can Change Everything"
+            subtitle={
+              "If you're dealing with an issue related to this service, feel free to reach out. We'll explain your options clearly and guide you through the right next steps."
+            }
+          />
+        </section>
+      </div>
+    </main>
+  );
 }
-
-export default page

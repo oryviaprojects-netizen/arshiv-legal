@@ -1,5 +1,4 @@
 "use client";
-
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,107 +12,54 @@ export default function ServiceCard({
 }) {
   return (
     <div
-      className="
-        w-full max-w-6xl mx-auto 
-        px-s16 lg:px-s32
-        flex flex-col lg:flex-row 
-        items-start justify-center 
-        gap-s24
-      "
-    >
+      className="max-w-6xl mx-auto flex flex-col lg:flex-row justify-center gap-s16">
       {/* LEFT IMAGE */}
       <div
-        className="
-          w-full 
-          lg:w-[300px] 
-          flex-shrink-0
-        "
-      >
-        <div
-          className="
-            rounded-xl overflow-hidden shadow-md 
-            w-full 
-            h-[220px] sm:h-[300px] lg:h-[395px]
-          "
-        >
-          <Image
-            src={image}
-            alt={title}
-            width={300}
-            height={400}
-            className="lg:w-[300px] lg:h-[400px] w-full   object-cover"
-          />
-        </div>
+        className="lg:w-1/3 aspect-video overflow-hidden rounded-r16">
+        <Image
+          src={image}
+          alt={title}
+          width={500}
+          height={500}
+          className="h-full w-full object-cover"
+        />
       </div>
-
       {/* RIGHT CARD */}
-  <div
-  className="
-    w-full 
-    border-2 border-secondary-main 
-    rounded-xl 
-    p-s16 md:p-s24 lg:p-s32 
-    bg-background shadow-sm 
-    flex flex-col gap-s16  
-  "
->
-
-        <div>
-          <h2 className="page-title-h2 text-accent-main mb-4 lg:mb-6">
-            {title}
-          </h2>
-
-          <p className="body-large text-main mb-4 lg:mb-6">
-            {description}
-          </p>
-
-          <h4 className="title-h4 mb-3">{subTitle}</h4>
-
-          <div className="flex flex-col lg:flex-row lg:justify-between gap-4 lg:gap-0">
-            <ul className="list-disc ml-6 body-default text-main space-y-1 max-w-[60ch]">
-              {matters.map((m, idx) => (
-                <li key={idx}>
-                  <Link href={m.href} className="hover:text-accent-main">
-                    {m.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-
-            {/* Desktop CTA */}
-            <div className="hidden lg:flex ">
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  const focus = title.toUpperCase();
-                  window.location.href = `/legal-services?focus=${encodeURIComponent(
-                    focus
-                  )}`;
-                }}
-                children={"More Services"}
-              />
-                
-             
-            </div>
+      <div
+        className="w-fit h-fit rounded-r16 p-s32 border-2 border-secondary-main flex flex-col gap-s16">
+        <h2 className="page-title-h2 text-accent-main">
+          {title}
+        </h2>
+        <p className="body-large">
+          {description}
+        </p>
+        <h4 className="title-h4">{subTitle}</h4>
+        <div className="flex flex-col lg:flex-row justify-between gap-s16">
+          <ul className="list-disc body-default w-fit text-main">
+            {matters.map((m, idx) => (
+              <li key={idx}>
+                <Link href={m.href} className="hover:text-accent-main">
+                  {m.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          {/* CTA */}
+          <div>
+            <Button
+              variant="secondary"
+              className="w-full"
+              onClick={() => {
+                const focus = title.toUpperCase();
+                window.location.href = `/legal-services?focus=${encodeURIComponent(
+                  focus
+                )}`;
+              }}
+              children={"More Services"}
+            />
           </div>
         </div>
-
-        {/* Mobile CTA */}
-        <div className=" lg:hidden">
-          <Button
-            variant="secondary"
-            className="w-full"
-            onClick={() => {
-              const focus = title.toUpperCase();
-              window.location.href = `/legal-services?focus=${encodeURIComponent(
-                focus
-              )}`;
-            }}
-          >
-            More Services
-          </Button>
-        </div>
       </div>
-    </div>
+    </div >
   );
 }

@@ -26,7 +26,7 @@ export default function BlogVideoListingPage({ searchQuery = "", onClearSearch }
       }
 
       const queryParam = query ? `&query=${encodeURIComponent(query)}` : "";
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog?page=${pageNum}&limit=${limit}${queryParam}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/blog?page=${pageNum}&limit=${limit}${queryParam}`);
       const json = await res.json();
 
       const blogs = json?.data?.blogs || [];

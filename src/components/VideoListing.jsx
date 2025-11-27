@@ -26,7 +26,7 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
       }
 
       const queryParam = query ? `&query=${encodeURIComponent(query)}` : "";
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/video?page=${pageNum}&limit=${limit}${queryParam}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/video?page=${pageNum}&limit=${limit}${queryParam}`);
       const json = await res.json();
 
       const videos = json?.data?.videos || [];

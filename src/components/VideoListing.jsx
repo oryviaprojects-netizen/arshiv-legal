@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CardVariant from "@/components/ui/CardVariant";
 import { useRouter } from "next/navigation";
 import Button from "./ui/Button";
 
 export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -15,18 +14,41 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
   const [hasSearched, setHasSearched] = useState(false);
 
   const router = useRouter();
+  const abortRef = useRef(null);
+  const cacheRef = useRef({});
   const limit = 5;
 
   const fetchData = async (pageNum = 1, append = false, query = "") => {
-    try {
-      if (append) {
-        setLoadingMore(true);
-      } else {
-        setLoading(true);
-      }
+    // Cache key for this specific query
+    const cacheKey = `${query}_${pageNum}`;
 
+    // Return cached data instantly if available
+    if (cacheRef.current[cacheKey] && !append) {
+      const cached = cacheRef.current[cacheKey];
+      setItems(cached.items);
+      setTotal(cached.total);
+      setHasMore(cached.hasMore);
+      return;
+    }
+
+    // Cancel previous request
+    if (abortRef.current) abortRef.current.abort();
+    abortRef.current = new AbortController();
+
+    if (append) setLoadingMore(true);
+
+    try {
       const queryParam = query ? `&query=${encodeURIComponent(query)}` : "";
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/video?page=${pageNum}&limit=${limit}${queryParam}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/video?page=${pageNum}&limit=${limit}${queryParam}`,
+        {
+          signal: abortRef.current.signal,
+          cache: 'force-cache'
+        }
+      );
+
+      if (!res.ok) throw new Error('Failed to fetch');
+
       const json = await res.json();
 
       const videos = json?.data?.videos || [];
@@ -41,11 +63,21 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
 
       setTotal(totalVideos);
       setHasMore(pageNum < totalPages);
+
+      // Cache the result (don't cache appended results)
+      if (!append) {
+        cacheRef.current[cacheKey] = {
+          items: videos,
+          total: totalVideos,
+          hasMore: pageNum < totalPages
+        };
+      }
     } catch (err) {
-      console.error("Error fetching:", err);
-      if (!append) setItems([]);
+      if (err.name !== 'AbortError') {
+        console.error("Error fetching:", err);
+        if (!append) setItems([]);
+      }
     } finally {
-      setLoading(false);
       setLoadingMore(false);
     }
   };
@@ -57,45 +89,46 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
   };
 
   const handleExploreMore = () => {
+    setHasSearched(false);
     setPage(1);
     fetchData(1, false, "");
+    onClearSearch?.();
   };
 
   const handleBack = () => {
     setHasSearched(false);
     setPage(1);
     fetchData(1, false, "");
-    if (onClearSearch) {
-      onClearSearch();
-    }
+    onClearSearch?.();
   };
 
+  // Fetch data when searchQuery changes
   useEffect(() => {
     setPage(1);
-    if (searchQuery.trim()) {
-      setHasSearched(true);
-    }
+    setHasSearched(!!searchQuery.trim());
     fetchData(1, false, searchQuery);
-  }, [searchQuery]);
 
+    return () => {
+      if (abortRef.current) abortRef.current.abort();
+    };
+  }, [searchQuery]);
 
   return (
     <main className="w-full bg-background px-s64 py-s32">
       {/* SEARCH RESULTS INFO */}
       {hasSearched && searchQuery && items.length > 0 && (
-        <div className="mb-s16   ">
-          <p
+        <div className="mb-s16">
+          <span
             onClick={handleBack}
-            className="text-accent-main cursor-pointer hover:underline mr-2"
+            className="text-accent-main cursor-pointer hover:underline"
           >
             ← Back
-          </p>
-
+          </span>
         </div>
       )}
 
       {/* NO RESULTS */}
-      {searchQuery && items.length === 0 && !loading && (
+      {searchQuery && items.length === 0 && (
         <div className="flex flex-col items-center justify-center my-s48 text-center">
           <svg
             className="w-24 h-24 text-gray-300 mb-4"
@@ -116,10 +149,7 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
           <p className="text-text-secondary mb-6">
             Try different keywords or explore all videos
           </p>
-          <Button
-            onClick={handleExploreMore}
-            variant={"ctaAccent"}
-          >
+          <Button onClick={handleExploreMore} variant="ctaAccent">
             Explore All Videos
           </Button>
         </div>
@@ -127,42 +157,27 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
 
       {/* GRID */}
       {items.length > 0 && (
-        <div className="">
-          <div
-            className="
-              w-full
-              grid
-              gap-x-s64
-              gap-y-s64
-              grid-cols-1
-              sm:grid-cols-2
-              md:grid-cols-3
-              xl:grid-cols-4
-              justify-items-center
-            "
-          >
-            {items.map((item) => (
-              <div
-                key={item._id}
-                onClick={() => {
-                  // ✅ Redirect to video URL in same tab
-                  if (item.redirectUrl) {
-                    window.location.href = item.redirectUrl;
-                  }
-                }}
-              >
-                <CardVariant
-                  image={item.thumbnail}
-                  title={item.title}
-                  description={item.description}
-                  duration={item.duration}
-                  variant={item.platform}
-                  redirectUrl={item.redirectUrl}
-                  id={item._id}
-                />
-              </div>
-            ))}
-          </div>
+        <div className="w-full grid gap-x-s64 gap-y-s64 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-center">
+          {items.map((item) => (
+            <div
+              key={item._id}
+              onClick={() => {
+                if (item.redirectUrl) {
+                  window.location.href = item.redirectUrl;
+                }
+              }}
+            >
+              <CardVariant
+                image={item.thumbnail}
+                title={item.title}
+                description={item.description}
+                duration={item.duration}
+                variant={item.platform}
+                redirectUrl={item.redirectUrl}
+                id={item._id}
+              />
+            </div>
+          ))}
         </div>
       )}
 
@@ -172,24 +187,17 @@ export default function VideoListingPage({ searchQuery = "", onClearSearch }) {
           <Button
             onClick={handleLoadMore}
             disabled={loadingMore}
-            variant={"ctaAccent"}
+            variant="ctaAccent"
           >
-            {loadingMore ? "Loading..." : `Load More (${items.length} of ${total})`}
+            {loadingMore ? "Loading..." : `Load More`}
           </Button>
         </div>
       )}
 
       {/* ALL LOADED MESSAGE */}
       {!hasMore && items.length > 0 && (
-        <div className="text-center mt-s48 text-disabled">
+        <div className="text-center mt-12 text-disabled">
           All items loaded ({items.length} of {total})
-        </div>
-      )}
-
-      {/* EMPTY STATE */}
-      {!loading && items.length === 0 && !searchQuery && (
-        <div className="text-center mt-s48 text-disabled">
-          No videos found.
         </div>
       )}
     </main>

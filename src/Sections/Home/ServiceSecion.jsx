@@ -16,12 +16,12 @@ export default function ServicesSection() {
   const matters = services[selectedLaw.title?.toUpperCase()] || [];
 
   return (
-    <section className="max-w-7xl gap-s32">
+    <section>
       {/* HEADING */}
-      <h2 className="subheading-h3">
+      <h2 className="subheading-h3 mb-s24 lg:mb-s32">
         <span className="text-accent-main">{arrow}</span>{topHeading}
       </h2>
-      <div className="flex flex-col items-center gap-s32">
+      <div className="flex flex-col items-center gap-s16">
         {/* DYNAMIC SERVICE CARD */}
         <div className="w-full">
           <ServiceCard
@@ -35,7 +35,7 @@ export default function ServicesSection() {
         {/* TABS */}
         <div className="w-full max-w-4xl">
           {/* MOBILE → horizontal scroll */}
-          <div className="lg:hidden w-full px-s16 overflow-x-auto scrollbar-hide">
+          <div className="md:hidden w-full px-s16 overflow-x-auto scrollbar-hide">
             <div className="flex gap-3 min-w-max">
               {tabs.map((tab) => (
                 <Button
@@ -49,7 +49,7 @@ export default function ServicesSection() {
             </div>
           </div>
           {/* DESKTOP → 4-column grid */}
-          <div className="hidden lg:grid grid-cols-4 gap-s16">
+          <div className="hidden md:grid grid-cols-4 gap-s16">
             {tabs.map((tab, idx) => {
               const colClass = idx === 4 ? "md:col-start-2" : "";
 

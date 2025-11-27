@@ -12,7 +12,7 @@ export default function BlogContentPage({ params }) {
   useEffect(() => {
     async function fetchBlog() {
       try {
-        const res = await fetch(`http://localhost:3000/api/blog/${id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog/${id}`);
         const result = await res.json();
         setBlog(result?.data || null);
       } catch (err) {
@@ -50,7 +50,7 @@ export default function BlogContentPage({ params }) {
     });
   };
 
- 
+
 
   if (!blog) {
     return (
@@ -71,8 +71,8 @@ export default function BlogContentPage({ params }) {
       <div className="bg-gradient-to-b from-accent-light to-background border-b-2 border-accent-main/20">
         <div className="max-w-4xl mx-auto px-s64 py-s32">
           {/* Back Button */}
-          <Link 
-            href="/blog" 
+          <Link
+            href="/blog"
             className="inline-flex items-center gap-2 text-accent-main hover:text-accent-dark body-default mb-s24 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -97,13 +97,13 @@ export default function BlogContentPage({ params }) {
           <div className="flex flex-wrap items-center gap-s24 body-default text-text-secondary mb-s16">
             <div className="flex items-center gap-s8">
               <Calendar className="w-4 h-4" />
-              <span>{new Date(blog.createdAt).toLocaleDateString('en-US', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
+              <span>{new Date(blog.createdAt).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
               })}</span>
             </div>
-            
+
             {blog.duration && (
               <div className="flex items-center gap-s8">
                 <Clock className="w-4 h-4" />
@@ -124,7 +124,7 @@ export default function BlogContentPage({ params }) {
           {blog.tags && blog.tags.length > 0 && (
             <div className="flex flex-wrap gap-s8">
               {blog.tags.map((tag, idx) => (
-                <span 
+                <span
                   key={idx}
                   className="px-s12 py-s4 bg-secondary-main text-primary-main rounded-full text-sm"
                 >
@@ -141,9 +141,9 @@ export default function BlogContentPage({ params }) {
         {/* Thumbnail */}
         {blog.thumbnail && (
           <div className="mb-s48 rounded-r24 overflow-hidden shadow-2xl border-2 border-accent-main/30">
-            <img 
-              src={blog.thumbnail} 
-              alt={blog.title} 
+            <img
+              src={blog.thumbnail}
+              alt={blog.title}
               className="w-full h-auto object-cover"
             />
           </div>
@@ -188,7 +188,7 @@ export default function BlogContentPage({ params }) {
           <p className="body-default text-text-secondary mb-s24">
             Explore more insightful content on our blog
           </p>
-          <Link 
+          <Link
             href="/blog"
             className="inline-block px-s32 py-s16 bg-accent-main text-white rounded-r8 hover:bg-accent-dark transition-colors font-semibold"
           >

@@ -18,38 +18,38 @@ export default function CaseStudy() {
   };
 
   const handleClose = () => {
-    setOpen(false); // 🔥 trigger gavel animation
+    setOpen(false); // trigger gavel animation
 
     setTimeout(() => {
-      setActiveCase(null); // 🔥 unmount AFTER animation completes
+      setActiveCase(null); // unmount AFTER animation completes
     }, 450); // match your gavel CSS duration (0.5s)
   };
 
   return (
-    <section className="w-full bg-background flex flex-col gap-s32 items-center">
+    <section className="max-w-7xl">
 
       {/* ⭐ CASE STUDIES GRID */}
-<div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-3 gap-s32 my-s32">
-  {caseStudies.map((item) => (
-    <button
-      key={item.id}
-      onClick={() => handleOpen(item)}
-      className="cursor-pointer group flex justify-center"
-    >
-      <Image
-        src={item.image}
-        alt="Case Study"
-        width={302}
-        height={400}
-        className="
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-s32 my-s32">
+        {caseStudies.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => handleOpen(item)}
+            className="cursor-pointer group flex justify-center"
+          >
+            <Image
+              src={item.image}
+              alt="Case Study"
+              width={302}
+              height={400}
+              className="
           rounded-lg object-contain max-h-[400px]
           transition-transform duration-300 ease-out
           group-hover:-translate-y-3
         "
-      />
-    </button>
-  ))}
-</div>
+            />
+          </button>
+        ))}
+      </div>
 
 
       {/* ⭐ POPUP (with delayed unmount) */}
@@ -65,7 +65,7 @@ export default function CaseStudy() {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
-              transition={{ damping:"10"}}
+              transition={{ damping: "10" }}
               className="
                 relative
                 w-full

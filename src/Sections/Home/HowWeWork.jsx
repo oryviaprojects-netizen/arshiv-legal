@@ -54,22 +54,17 @@ export default function HowWeWork() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-background relative overflow-hidden space-y-s32 z-10"
+      className="max-w-7xl relative overflow-hidden  space-y-s24 lg:space-y-s32 z-10"
     >
       {/* Heading */}
-      <div className="max-w-7xl mx-auto ">
-        <h2 className="page-title-h2 text-accent-main mb-s16">{heading}</h2>
-        <p className="body-large text-main">{description}</p>
-      </div>
-
+      <h2 className="page-title-h2 text-accent-main">{heading}</h2>
+      <p className="body-large mb-s16">{description}</p>
       {/* Cards Container */}
       <div
-        className="max-w-5xl mx-auto mt-s48 px-s16 relative overflow-hidden"
-        ref={sliderWrapperRef}
-      >
+        className="max-w-5xl mx-auto px-s16 relative overflow-hidden"
+        ref={sliderWrapperRef}>
         {/* LEFT GRADIENT */}
         <div className="absolute left-0 top-0 h-full w-20 bg-linear-to-r from-background to-transparent pointer-events-none z-20" />
-
         {/* RIGHT GRADIENT */}
         <div className="absolute right-0 top-0 h-full w-20 bg-linear-to-l from-background to-transparent pointer-events-none z-20" />
 
@@ -84,8 +79,7 @@ export default function HowWeWork() {
           ))}
         </div>
       </div>
-
-      <p className="text-center body-small">{footerNote}</p>
-    </section>
+      <p className="text-center body-small mt-s16">{footerNote}</p>
+    </section >
   );
 }

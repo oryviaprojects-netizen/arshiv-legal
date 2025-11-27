@@ -10,11 +10,9 @@ export default function GetInTouch({
 
   return (
     <section
-      className={`
-        w-full max-w-7xl mx-auto rounded-r16 p-s32 md:p-s48 lg:p-s64 flex flex-col items-center text-center gap-s16 md:gap-s24 lg:gap-s32
+      className={`rounded-r16 p-s32 md:p-s48 lg:p-s64 flex flex-col items-center text-center gap-s16 md:gap-s24 lg:gap-s32
         ${isBlue ? "bg-primary-main text-background" : "bg-background text-main"}
-      `}
-    >
+      `}>
       <div className="flex flex-col gap-s8 lg:gap-s16">
         {/* Title */}
         <h2

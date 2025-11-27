@@ -7,20 +7,18 @@ export default function FaqSection({ faqs = [] }) {
   }
 
   return (
-    <section className="w-full">
-      <div className="max-w-7xl mx-auto space-y-s16 md:space-y-s24 lg:space-y-s32">
-        <h2 className="page-title-h2 text-accent-main">FAQ</h2>
-        <div>
-          {faqs.map((faq, index) => (
-            <Accordion
-              key={index}
-              question={faq.question}
-              answer={faq.answer}
-              isLast={index === faqs.length - 1}
-            />
-          ))}
-        </div>
+    <div className=" space-y-s16 lg:space-y-s32">
+      <h2 className="page-title-h2 text-accent-main">FAQ</h2>
+      <div>
+        {faqs.map((faq, index) => (
+          <Accordion
+            key={index}
+            question={faq.question}
+            answer={faq.answer}
+            isLast={index === faqs.length - 1}
+          />
+        ))}
       </div>
-    </section>
+    </div>
   );
 }

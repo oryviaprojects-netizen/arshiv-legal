@@ -31,8 +31,8 @@ const faqs = Data?.homePage?.faqs || [];
 
 export default function Page() {
   return (
-    <main role="main" className="mx-auto max-w-7xl px-s16 md:px-s32 py-s40 md:py-s48 lg:py-s64">
-      <div className="flex flex-col space-y-s40 md:space-y-s48 lg:space-y-s64">
+    <main role="main" className="w-full px-s16 md:px-s32 py-s40 md:py-s48 lg:py-s64">
+      <div className="flex flex-col   space-y-s40 md:space-y-s48 lg:space-y-s64">
         {/* Hero: keep server-rendered for SEO / LCP */}
         <section aria-labelledby="hero-heading">
           <HeroSection />

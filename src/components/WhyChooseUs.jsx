@@ -7,7 +7,7 @@ export default function WhyChooseUs() {
   if (!whyChooseUs) return null;
   return (
     <section
-      className="max-w-7xl mx-auto flex flex-col gap-s24 md:gap-s24 lg:gap-s32"
+      className="flex flex-col gap-s24 lg:gap-s32"
     >
       {/* Title */}
       <h2 className="page-title-h2 text-accent-main">

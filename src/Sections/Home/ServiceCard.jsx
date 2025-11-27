@@ -12,7 +12,7 @@ export default function ServiceCard({
 }) {
   return (
     <div
-      className="max-w-6xl mx-auto flex flex-col lg:flex-row justify-center gap-s16">
+      className="max-w-5xl mx-auto flex flex-col lg:flex-row justify-center gap-s16">
       {/* LEFT IMAGE */}
       <div
         className="lg:w-1/3 aspect-video overflow-hidden rounded-r16">
@@ -26,7 +26,7 @@ export default function ServiceCard({
       </div>
       {/* RIGHT CARD */}
       <div
-        className="w-fit h-fit rounded-r16 p-s32 border-2 border-secondary-main flex flex-col gap-s16">
+        className="w-fit h-fit rounded-r16 border-2 border-secondary-main flex flex-col gap-s16 p-s16 md:p-s24 lg:p-s32">
         <h2 className="page-title-h2 text-accent-main">
           {title}
         </h2>

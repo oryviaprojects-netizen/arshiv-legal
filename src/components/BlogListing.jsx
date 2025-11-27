@@ -1,12 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CardVariant from "@/components/ui/CardVariant";
 import { useRouter } from "next/navigation";
 import Button from "./ui/Button";
 
 export default function BlogVideoListingPage({ searchQuery = "", onClearSearch }) {
   const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -14,18 +13,41 @@ export default function BlogVideoListingPage({ searchQuery = "", onClearSearch }
   const [hasSearched, setHasSearched] = useState(false);
 
   const router = useRouter();
+  const abortRef = useRef(null);
+  const cacheRef = useRef({});
   const limit = 5;
 
   const fetchData = async (pageNum = 1, append = false, query = "") => {
-    try {
-      if (append) {
-        setLoadingMore(true);
-      } else {
-        setLoading(true);
-      }
+    // Cache key for this specific query
+    const cacheKey = `${query}_${pageNum}`;
 
+    // Return cached data instantly if available
+    if (cacheRef.current[cacheKey] && !append) {
+      const cached = cacheRef.current[cacheKey];
+      setItems(cached.items);
+      setTotal(cached.total);
+      setHasMore(cached.hasMore);
+      return;
+    }
+
+    // Cancel previous request
+    if (abortRef.current) abortRef.current.abort();
+    abortRef.current = new AbortController();
+
+    if (append) setLoadingMore(true);
+
+    try {
       const queryParam = query ? `&query=${encodeURIComponent(query)}` : "";
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog?page=${pageNum}&limit=${limit}${queryParam}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/blog?page=${pageNum}&limit=${limit}${queryParam}`,
+        {
+          signal: abortRef.current.signal,
+          cache: 'force-cache'
+        }
+      );
+
+      if (!res.ok) throw new Error('Failed to fetch');
+
       const json = await res.json();
 
       const blogs = json?.data?.blogs || [];
@@ -40,11 +62,21 @@ export default function BlogVideoListingPage({ searchQuery = "", onClearSearch }
 
       setTotal(totalBlogs);
       setHasMore(pageNum < totalPages);
+
+      // Cache the result (don't cache appended results)
+      if (!append) {
+        cacheRef.current[cacheKey] = {
+          items: blogs,
+          total: totalBlogs,
+          hasMore: pageNum < totalPages
+        };
+      }
     } catch (err) {
-      console.error("Error fetching:", err);
-      if (!append) setItems([]);
+      if (err.name !== 'AbortError') {
+        console.error("Error fetching:", err);
+        if (!append) setItems([]);
+      }
     } finally {
-      setLoading(false);
       setLoadingMore(false);
     }
   };
@@ -56,51 +88,47 @@ export default function BlogVideoListingPage({ searchQuery = "", onClearSearch }
   };
 
   const handleExploreMore = () => {
+    setHasSearched(false);
     setPage(1);
     fetchData(1, false, "");
-    if (onClearSearch) {
-      onClearSearch();
-    }
+    onClearSearch?.();
   };
 
   const handleBack = () => {
     setHasSearched(false);
     setPage(1);
     fetchData(1, false, "");
-    if (onClearSearch) {
-      onClearSearch();
-    }
+    onClearSearch?.();
   };
 
-  // ✅ Fetch data when searchQuery changes from parent
+  // Fetch data when searchQuery changes
   useEffect(() => {
     setPage(1);
-    if (searchQuery.trim()) {
-      setHasSearched(true);
-    }
+    setHasSearched(!!searchQuery.trim());
     fetchData(1, false, searchQuery);
+
+    return () => {
+      if (abortRef.current) abortRef.current.abort();
+    };
   }, [searchQuery]);
-
-
 
   return (
     <div className="w-full">
-      {/* SEARCH RESULTS INFO - Only show when searching AND have results */}
+      {/* SEARCH RESULTS INFO */}
       {hasSearched && searchQuery && items.length > 0 && (
         <div className="mb-s16">
           <span
             onClick={handleBack}
-            className="text-accent-main cursor-pointer hover:underline mr-2"
+            className="text-accent-main cursor-pointer hover:underline"
           >
             ← Back
           </span>
-
         </div>
       )}
 
-      {/* NO RESULTS - Only show when searching with no results */}
-      {searchQuery && items.length === 0 && !loading && (
-        <div className="flex flex-col items-center justify-center my-s48 text-center">
+      {/* NO RESULTS */}
+      {searchQuery && items.length === 0 && (
+        <div className="flex flex-col items-center justify-center my-s48  text-center">
           <svg
             className="w-24 h-24 text-gray-300 mb-4"
             fill="none"
@@ -120,44 +148,27 @@ export default function BlogVideoListingPage({ searchQuery = "", onClearSearch }
           <p className="text-text-secondary mb-6">
             Try different keywords or explore all blogs
           </p>
-          <Button
-            onClick={handleExploreMore}
-            variant="ctaAccent"
-          >
+          <Button onClick={handleExploreMore} variant="ctaAccent">
             Explore More
           </Button>
         </div>
       )}
 
-      {/* GRID - Only show when we have items */}
+      {/* GRID */}
       {items.length > 0 && (
-        <div className="">
-          <div
-            className="
-              w-full
-              grid
-              gap-x-s64
-              gap-y-s64
-              grid-cols-1
-              sm:grid-cols-2
-              md:grid-cols-3
-              xl:grid-cols-4
-              justify-items-center
-            "
-          >
-            {items.map((item) => (
-              <div key={item._id} onClick={() => router.push(`/blog/${item._id}`)}>
-                <CardVariant
-                  image={item.thumbnail}
-                  title={item.title}
-                  description={item.description}
-                  duration={item.duration}
-                  variant={item.type}
-                  id={item._id}  // ✅ Add this
-                />
-              </div>
-            ))}
-          </div>
+        <div className="w-full grid gap-x-s64 gap-y-s64 grid-cols-1 py-s32 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-items-center">
+          {items.map((item) => (
+            <div key={item._id} onClick={() => router.push(`/blog/${item._id}`)}>
+              <CardVariant
+                image={item.thumbnail}
+                title={item.title}
+                description={item.description}
+                duration={item.duration}
+                variant={item.type}
+                id={item._id}
+              />
+            </div>
+          ))}
         </div>
       )}
 
@@ -169,7 +180,7 @@ export default function BlogVideoListingPage({ searchQuery = "", onClearSearch }
             disabled={loadingMore}
             variant="ctaAccent"
           >
-            {loadingMore ? "Loading..." : `Load More (${items.length} of ${total})`}
+            {loadingMore ? "Loading..." : `Load More `}
           </Button>
         </div>
       )}
@@ -181,12 +192,7 @@ export default function BlogVideoListingPage({ searchQuery = "", onClearSearch }
         </div>
       )}
 
-      {/* EMPTY STATE - Only when no search and no items */}
-      {!loading && items.length === 0 && !searchQuery && (
-        <div className="text-center mt-12 text-disabled">
-          No blogs found.
-        </div>
-      )}
+
     </div>
   );
 }

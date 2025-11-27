@@ -9,54 +9,42 @@ export default function DontHesitateSection() {
 
   return (
     <section
-      className="
-        w-full 
-        mx-auto
-        max-w-7xl 
-        bg-background
-        flex flex-col items-center 
-        gap-s64
-      "
-    >
+      className="flex flex-col items-center gap-s64">
       {/* TITLE + GAVEL ICONS */}
       <div
-        className="
-          flex text-center items-center lg:gap-s16
-        "
-      >
+        className="flex text-center items-center gap-s8">
         {/* Left Gavel */}
-        <Image
-          src="/Images/gavel-brown-1.svg"
-          alt="Gavel"
-          width={84}
-          height={16}
-          className="object-contain md:w[181px] md:h-9 lg:w-[200px] lg:h-10"
-        />
-
-        <h2 className="page-title-h2 text-main">
+        <div className="w-1/3 lg:w-1/4">
+          <Image
+            src="/Images/gavel-brown-1.svg"
+            alt="Gavel"
+            width={200}
+            height={40}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <h2 className="page-title-h2">
           {dontHesitate.title}
         </h2>
-
         {/* Right Gavel */}
-        <Image
-          src="/Images/gavel-brown-1.svg"
-          alt="Gavel"
-          width={84}
-          height={16}
-          className="object-contain rotate-180 md:w[181px] md:h-9 lg:w-[200px] lg:h-10"
-        />
+        <div className="w-1/3 lg:w-1/4">
+          <Image
+            src="/Images/gavel-brown-1.svg"
+            alt="Gavel"
+            width={200}
+            height={40}
+            className="w-full h-full object-cover rotate-180"
+          />
+        </div>
       </div>
-
       {/* DESCRIPTION */}
       <div className="text-center">
-        <span className="text-accent-main body-large ">“</span>
+        <span className="text-accent-main body-large">“</span>
         <span
-          className="
-          body-large 
-          text-main">
+          className="body-large text-main">
           {dontHesitate.description}
         </span>
-        <span className="text-accent-main body-large ">”</span>
+        <span className="text-accent-main body-large">”</span>
       </div>
     </section>
   );

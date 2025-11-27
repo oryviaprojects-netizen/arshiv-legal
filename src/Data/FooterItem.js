@@ -33,8 +33,8 @@ export const footerItem = [
     item: "Resources",
     subItem: [
       { label: "Blog", link: "/blog" },
-      { label: "Daily Legal Content", link: "/Daily-Legal-Content" },
-      { label: "What Should I Do Now?", link: "/What-Should-I-Do-Now" },
+      { label: "Daily Legal Content", link: "/daily-legal-content" },
+      { label: "What Should I Do Now?", link: "/what-should-i-do-now" },
     ],
   },
 

@@ -16,54 +16,56 @@ export default function ServicesSection() {
   const matters = services[selectedLaw.title?.toUpperCase()] || [];
 
   return (
-    <section className="max-w-7xl flex flex-col">
+    <section className="max-w-7xl gap-s32">
       {/* HEADING */}
       <h2 className="subheading-h3">
         <span className="text-accent-main">{arrow}</span>{topHeading}
       </h2>
-      {/* DYNAMIC SERVICE CARD */}
-      <div className="">
-        <ServiceCard
-          image={selectedLaw.image}
-          title={selectedLaw.title}
-          description={selectedLaw.description}
-          matters={matters}
-          subTitle={selectedLaw.subTitle}
-        />
-      </div>
-      {/* TABS */}
-      <div className=" max-w-4xl">
-        {/* MOBILE → horizontal scroll */}
-        <div className="lg:hidden w-full px-s16 overflow-x-auto scrollbar-hide">
-          <div className="flex gap-3 min-w-max">
-            {tabs.map((tab) => (
-              <Button
-                key={tab.slug}
-                variant={activeTab === tab.slug ? "primary" : "outliner"}
-                onClick={() => setActiveTab(tab.slug)}
-                aria-pressed={activeTab === tab.slug}>
-                {tab.label}
-              </Button>
-            ))}
-          </div>
+      <div className="flex flex-col items-center gap-s32">
+        {/* DYNAMIC SERVICE CARD */}
+        <div className="w-full">
+          <ServiceCard
+            image={selectedLaw.image}
+            title={selectedLaw.title}
+            description={selectedLaw.description}
+            matters={matters}
+            subTitle={selectedLaw.subTitle}
+          />
         </div>
-        {/* DESKTOP → 4-column grid */}
-        <div className="hidden lg:grid grid-cols-4 gap-s16">
-          {tabs.map((tab, idx) => {
-            const colClass = idx === 4 ? "md:col-start-2" : "";
-
-            return (
-              <div key={tab.slug} className={colClass}>
+        {/* TABS */}
+        <div className="w-full max-w-4xl">
+          {/* MOBILE → horizontal scroll */}
+          <div className="lg:hidden w-full px-s16 overflow-x-auto scrollbar-hide">
+            <div className="flex gap-3 min-w-max">
+              {tabs.map((tab) => (
                 <Button
+                  key={tab.slug}
                   variant={activeTab === tab.slug ? "primary" : "outliner"}
-                  className="w-full"
                   onClick={() => setActiveTab(tab.slug)}
                   aria-pressed={activeTab === tab.slug}>
                   {tab.label}
                 </Button>
-              </div>
-            );
-          })}
+              ))}
+            </div>
+          </div>
+          {/* DESKTOP → 4-column grid */}
+          <div className="hidden lg:grid grid-cols-4 gap-s16">
+            {tabs.map((tab, idx) => {
+              const colClass = idx === 4 ? "md:col-start-2" : "";
+
+              return (
+                <div key={tab.slug} className={colClass}>
+                  <Button
+                    variant={activeTab === tab.slug ? "primary" : "outliner"}
+                    className="w-full"
+                    onClick={() => setActiveTab(tab.slug)}
+                    aria-pressed={activeTab === tab.slug}>
+                    {tab.label}
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

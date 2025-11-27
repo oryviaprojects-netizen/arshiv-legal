@@ -42,7 +42,7 @@ export default function SearchBar({ onSearch, endpoint = "blog" }) {
       setIsLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:3000/api/${endpoint}?query=${encodeURIComponent(searchTerm)}&limit=6`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/${endpoint}?query=${encodeURIComponent(searchTerm)}&limit=6`
         );
         const json = await res.json();
 
@@ -172,9 +172,8 @@ export default function SearchBar({ onSearch, endpoint = "blog" }) {
               <div
                 key={item._id}
                 onClick={() => selectSuggestion(item)}
-                className={`p-s12 cursor-pointer border-b-2 border-accent-main ${
-                  index === selectedIndex ? "bg-accent-light" : "hover:bg-gray-100"
-                }`}
+                className={`p-s12 cursor-pointer border-b-2 border-accent-main ${index === selectedIndex ? "bg-accent-light" : "hover:bg-gray-100"
+                  }`}
               >
                 <div className="flex gap-s16 p-2 ">
                   <img

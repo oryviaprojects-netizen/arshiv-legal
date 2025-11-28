@@ -56,37 +56,27 @@ export default function Hero() {
 
 
       {/* -------------------- DESKTOP VIEW -------------------- */}
-      <div className="hidden lg:flex w-full min-h-screen items-center justify-center">
-        <div className="w-full max-w-8xl grid grid-cols-2 justify-between px-s64 items-center">
-
-          {/* TEXT */}
-          <div className="space-y-6">
-            <h1 className="hero-h1 text-primary-main">{hero.mainHeading}</h1>
-
-            <p className="body-large text-text-secondary max-w-xl">
-              {hero.subHeading}
-            </p>
-
-            <Button children={hero.ctaButton} variant={"ctaAccent"} />
-
-
-          </div>
-
-          {/* IMAGE */}
-          <div className="flex justify-end">
-            <Image
-              src="/Images/hero.png"
-              width={600}
-              height={800}
-              priority
-              quality={100}
-              alt="Lady Justice"
-              className="w-full h-[650px] object-cover scale-[1.35] origin-top"
-              style={{ objectFit: 'cover' }}
-            />
-          </div>
+      <div className="hidden lg:flex max-w-7xl  h-screen mx-auto items-center justify-center">
+        {/* TEXT */}
+        <div className="spacing-y-s64">
+          <h1 className="hero-h1 text-primary-main">{hero.mainHeading}</h1>
+          <p className="body-large text-secondary">
+            {hero.subHeading}
+          </p>
+          <Button children={hero.ctaButton} variant={"ctaAccent"} />
+        </div>
+        {/* IMAGE */}
+        <div className="w-fit h-fti">
+          <Image
+            src="/Images/hero.png"
+            width={600}
+            height={1000}
+            quality={100}
+            alt="Lady Justice"
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
-    </section>
+    </section >
   );
 }

@@ -26,8 +26,7 @@ export default function CaseStudy() {
   };
 
   return (
-    <section className="max-w-7xl">
-
+    <section>
       {/* ⭐ CASE STUDIES GRID */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-s32 my-s32">
         {caseStudies.map((item) => (
@@ -41,11 +40,7 @@ export default function CaseStudy() {
               alt="Case Study"
               width={302}
               height={400}
-              className="
-          rounded-lg object-contain max-h-[400px]
-          transition-transform duration-300 ease-out
-          group-hover:-translate-y-3
-        "
+              className="rounded-lg object-contain max-h-[400px] transition-transform duration-300 ease-out group-hover:-translate-y-3"
             />
           </button>
         ))}
@@ -59,7 +54,7 @@ export default function CaseStudy() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] flex items-end justify-center"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-999 flex items-end justify-center"
           >
             <motion.div
               initial={{ y: "100%" }}

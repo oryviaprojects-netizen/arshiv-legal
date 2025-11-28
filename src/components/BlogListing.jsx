@@ -51,6 +51,8 @@ export default function BlogVideoListingPage({ searchQuery = "", onClearSearch }
       const json = await res.json();
 
       const blogs = json?.data?.blogs || [];
+console.log(blogs);
+
       const totalBlogs = json?.data?.total || 0;
       const totalPages = json?.data?.totalPages || 1;
 
